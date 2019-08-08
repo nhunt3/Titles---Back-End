@@ -21,6 +21,7 @@ app.get('/allTitles', (req, res) => {
     db.collection('Titles').find(
         {"TitleName": new RegExp(req.query.searchText, 'i')},
         { projection: { _id: 0, TitleName: 1, TitleId: 1 } } )
+        .sort({"TitleName": 1})
         .toArray(function(err, results) {
             res.send(results); 
     });
